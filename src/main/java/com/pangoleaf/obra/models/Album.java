@@ -36,6 +36,7 @@ public class Album {
     private Integer runTime;
     
     @OneToMany(mappedBy="album")
+    @Builder.Default
     private List<Track> listTracks = new ArrayList<>();
     
     public String runTimeReadable () {

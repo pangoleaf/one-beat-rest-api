@@ -32,10 +32,10 @@ public class Artist {
     
     @NonNull private String country;
     @NonNull private Integer startYear;
-    @NonNull private Integer endYear;
+    private Integer endYear;
     
     @OneToMany(mappedBy="artist")
     @Builder.Default
     private List<Album> listAlbums = new ArrayList<>();
-
+    
 }

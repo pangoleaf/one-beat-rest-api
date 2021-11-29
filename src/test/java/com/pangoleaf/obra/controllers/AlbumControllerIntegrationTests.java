@@ -15,12 +15,13 @@ import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.ResultMatcher;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.pangoleaf.obra.models.Album;
 import com.pangoleaf.obra.models.Artist;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 // @Sql(scripts = {"classpath:test-schema.sql", "classpath:test-data.sql"}, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-public class ArtistControllerIntegrationTests {
+public class AlbumControllerIntegrationTests {
     @Autowired
     private MockMvc mvc;
     
@@ -28,18 +29,19 @@ public class ArtistControllerIntegrationTests {
     private ObjectMapper mapper;
 
     @Test
-    void createArtistTest() throws Exception {
-        String artistJSON = this.mapper.writeValueAsString(
-            new Artist(null, "Opeth", "Sweden", 1990, 1990, null)
+    void createAlbumTest() throws Exception {
+        Artist artist = new Artist();
+        String albumJSON = this.mapper.writeValueAsString(
+            new Album(null, artist, "Ghost Reveries", 2005, 4003, null)
         );
-        String artistJSONResponse = this.mapper.writeValueAsString(
-            new Artist(1, "Opeth", "Sweden", 1990, 1990, null)
+        String albumJSONResponse = this.mapper.writeValueAsString(
+                new Album(1, artist, "Ghost Reveries", 2005, 4003, null)
         );
         
-        RequestBuilder request = post("/artist").contentType(MediaType.APPLICATION_JSON).content(artistJSON);
+        RequestBuilder request = post("/album").contentType(MediaType.APPLICATION_JSON).content(albumJSON);
         
         ResultMatcher status = status().isCreated();
-        ResultMatcher content = content().json(artistJSONResponse);
+        ResultMatcher content = content().json(albumJSONResponse);
         
         this.mvc.perform(request).andExpect(status).andExpect(content);
     }
