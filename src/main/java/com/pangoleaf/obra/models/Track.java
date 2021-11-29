@@ -1,13 +1,11 @@
 package com.pangoleaf.obra.models;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,17 +17,19 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Artist {
-
+public class Track {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    
+    @ManyToOne
+    @JoinColumn(name="album_id", referencedColumnName="id")
+    private Album album;
+    
     private String name;
-    private String country;
-    private Integer startYear;
-    private Integer endYear;
+    private Integer length;
     
-    @OneToMany(mappedBy="artist")
-    private List<Album> listAlbums = new ArrayList<>();
-    
+    public String lengthReadable () {
+        return Math.floor(this.length / 60) + ":" + this.length % 60;
+    }
 }
