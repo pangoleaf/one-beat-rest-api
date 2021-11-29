@@ -3,5 +3,5 @@ package com.pangoleaf.obra.controllers;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 public class BaseController {
-    String mapping = this.getClass().getAnnotation(RequestMapping.class).path()[0];
+    protected String mapping = this.getClass().getAnnotation(RequestMapping.class).path()[0];
 }
