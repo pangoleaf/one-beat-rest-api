@@ -14,6 +14,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 @Entity
 @Data
@@ -27,11 +28,11 @@ public class Artist {
     private Integer id;
     
     @Column(unique=true)
-    private String name;
+    @NonNull private String name;
     
-    private String country;
-    private Integer startYear;
-    private Integer endYear;
+    @NonNull private String country;
+    @NonNull private Integer startYear;
+    @NonNull private Integer endYear;
     
     @OneToMany(mappedBy="artist")
     @Builder.Default
