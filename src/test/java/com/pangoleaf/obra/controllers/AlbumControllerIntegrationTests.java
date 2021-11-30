@@ -32,10 +32,23 @@ public class AlbumControllerIntegrationTests {
     void createAlbumTest() throws Exception {
         Artist artist = new Artist();
         String albumJSON = this.mapper.writeValueAsString(
-            new Album(null, artist, "Ghost Reveries", 2005, 4003, null)
+                Album.builder()
+                    .artist(artist)
+                    .name("Opeth")
+                    .name("Ghost Reveries")
+                    .year(2005)
+                    .runTime(4003)
+                    .build()
         );
         String albumJSONResponse = this.mapper.writeValueAsString(
-                new Album(1, artist, "Ghost Reveries", 2005, 4003, null)
+                Album.builder()
+                .id(1)
+                .artist(artist)
+                .name("Opeth")
+                .name("Ghost Reveries")
+                .year(2005)
+                .runTime(4003)
+                .build()
         );
         
         RequestBuilder request = post("/album").contentType(MediaType.APPLICATION_JSON).content(albumJSON);

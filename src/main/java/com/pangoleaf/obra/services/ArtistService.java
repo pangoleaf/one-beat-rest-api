@@ -1,19 +1,25 @@
 package com.pangoleaf.obra.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pangoleaf.obra.models.Artist;
 import com.pangoleaf.obra.repos.ArtistRepo;
 
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-
 @Service
-@RequiredArgsConstructor
 public class ArtistService {
-    @NonNull private ArtistRepo repo;
+    @Autowired private ArtistRepo repo;
+    
+    @Autowired private AlbumService albumService;
     
     public Artist createArtist(Artist artist) {
-        return this.repo.save(artist);
+        Artist newArtist = this.repo.save(artist);
+        newArtist.getAlbums()
+            .forEach(a -> {
+                a.setArtist(newArtist);
+                albumService.createAlbum(a);
+            });
+        return newArtist;
     }
+
 }

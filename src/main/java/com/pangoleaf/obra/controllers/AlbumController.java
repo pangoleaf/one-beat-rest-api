@@ -9,19 +9,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pangoleaf.obra.models.Artist;
-import com.pangoleaf.obra.services.ArtistService;
+import com.pangoleaf.obra.models.Album;
+import com.pangoleaf.obra.services.AlbumService;
 import com.pangoleaf.obra.utils.Utils;
 
 @RestController
-@RequestMapping(path = "/artist")
-public class ArtistController extends BaseController {
-    @Autowired ArtistService service;
+@RequestMapping(path = "/album")
+public class AlbumController extends BaseController {
+    @Autowired AlbumService service;
     
     @PostMapping
-    public ResponseEntity<Artist> createArtist(@RequestBody Artist artist) {
-        Artist newArtist = this.service.createArtist(artist);
-        URI uri = Utils.getUri(this.mapping, Integer.toString(newArtist.getId()));
-        return ResponseEntity.created(uri).body(newArtist);
+    public ResponseEntity<Album> createAlbum(@RequestBody Album album) {
+        Album newAlbum = this.service.createAlbum(album);
+        URI uri = Utils.getUri(this.mapping, Integer.toString(newAlbum.getId()));
+        return ResponseEntity.created(uri).body(newAlbum);
     }
 }

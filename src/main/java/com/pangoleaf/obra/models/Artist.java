@@ -1,7 +1,7 @@
 package com.pangoleaf.obra.models;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,32 +10,35 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@AllArgsConstructor @RequiredArgsConstructor
+@Getter @Setter @Builder @ToString
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Artist {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
     @Column(unique=true)
-    @NonNull private String name;
+    private String name;
     
-    @NonNull private String country;
-    @NonNull private Integer startYear;
+    private String country;
+    private Integer startYear;
     private Integer endYear;
     
     @OneToMany(mappedBy="artist")
     @Builder.Default
-    private List<Album> listAlbums = new ArrayList<>();
+//    @JsonManagedReference(value="albums")
+    private Set<Album> albums = new HashSet<>();
     
 }
