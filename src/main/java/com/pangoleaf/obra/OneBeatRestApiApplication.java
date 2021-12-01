@@ -9,5 +9,7 @@ public class OneBeatRestApiApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(OneBeatRestApiApplication.class, args);
 	}
-
+	// get
+	// put
+	// delete
 }
