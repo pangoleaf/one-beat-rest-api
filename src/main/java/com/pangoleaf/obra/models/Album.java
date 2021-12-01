@@ -14,18 +14,20 @@ import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.pangoleaf.obra.utils.ITimeInSeconds;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 @Entity
 @AllArgsConstructor @RequiredArgsConstructor
-@Getter @Setter @Builder
+@Getter @Setter @Accessors @Builder
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class Album {
+public class Album implements ITimeInSeconds {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -35,18 +37,15 @@ public class Album {
     @JsonBackReference
     private Artist artist;
     
-//    private Integer artistId;
     private String name;
     private Integer year;
-    private Integer runTime;
+    private Integer length;
     
     @OneToMany(mappedBy="album")
     @Builder.Default
 //    @JsonManagedReference(value="tracks")
     private Set<Track> tracks = new HashSet<>();
     
-    public String runTimeReadable () {
-        return Math.floor(this.runTime / 60) + ":" + this.runTime % 60;
-    }
+
 
 }

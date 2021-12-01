@@ -19,10 +19,11 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.Accessors;
 
 @Entity
 @AllArgsConstructor @RequiredArgsConstructor
-@Getter @Setter @Builder @ToString
+@Getter @Setter @Accessors @Builder @ToString
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Artist {
     @Id

@@ -14,12 +14,7 @@ public class ArtistService {
     
     public Artist createArtist(Artist artist) {
         Artist newArtist = this.repo.save(artist);
-        newArtist.getAlbums()
-            .forEach(a -> {
-                a.setArtist(newArtist);
-                albumService.createAlbum(a);
-            });
+        newArtist.getAlbums().forEach(a -> albumService.createAlbum(a.setArtist(artist)));
         return newArtist;
     }
-
 }

@@ -10,18 +10,20 @@ import javax.persistence.ManyToOne;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.pangoleaf.obra.utils.ITimeInSeconds;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 @Entity
 @AllArgsConstructor @RequiredArgsConstructor
-@Getter @Setter @Builder
+@Getter @Setter @Accessors @Builder
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class Track {
+public class Track implements ITimeInSeconds {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -33,8 +35,5 @@ public class Track {
     
     private String name;
     private Integer length;
-    
-    public String lengthReadable () {
-        return Math.floor(this.length / 60) + ":" + this.length % 60;
-    }
+
 }

@@ -30,7 +30,7 @@ public class AlbumControllerIntegrationTests {
 
     @Test
     void createAlbumTest() throws Exception {
-        Artist artist = new Artist();
+        Artist artist = new Artist(); // add album to existing artist from dummy data... implement dummy data
         String albumJSON = this.mapper.writeValueAsString(
                 Album.builder()
                     .artist(artist)
