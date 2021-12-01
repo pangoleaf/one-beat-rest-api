@@ -30,10 +30,10 @@ public class ArtistControllerIntegrationTests {
     @Test
     void createArtistTest() throws Exception {
         String artistJSON = this.mapper.writeValueAsString(
-            new Artist(null, "Opeth", "Sweden", 1990, 1990, null)
+            Artist.builder().name("Opeth").country("Sweden").startYear(1990).build()
         );
         String artistJSONResponse = this.mapper.writeValueAsString(
-            new Artist(1, "Opeth", "Sweden", 1990, 1990, null)
+            Artist.builder().id(1).name("Opeth").country("Sweden").startYear(1990).build()
         );
         
         RequestBuilder request = post("/artist").contentType(MediaType.APPLICATION_JSON).content(artistJSON);

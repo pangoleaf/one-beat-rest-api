@@ -37,7 +37,7 @@ public class AlbumControllerIntegrationTests {
                     .name("Opeth")
                     .name("Ghost Reveries")
                     .year(2005)
-                    .runTime(4003)
+                    .length(4003)
                     .build()
         );
         String albumJSONResponse = this.mapper.writeValueAsString(
@@ -47,7 +47,7 @@ public class AlbumControllerIntegrationTests {
                 .name("Opeth")
                 .name("Ghost Reveries")
                 .year(2005)
-                .runTime(4003)
+                .length(4003)
                 .build()
         );
         

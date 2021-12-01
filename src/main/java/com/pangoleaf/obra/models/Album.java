@@ -14,20 +14,20 @@ import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import com.pangoleaf.obra.utils.ITimeInSeconds;
+import com.pangoleaf.obra.utils.IReadableTime;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
 @Entity
-@AllArgsConstructor @RequiredArgsConstructor
+@AllArgsConstructor @NoArgsConstructor
 @Getter @Setter @Accessors @Builder
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class Album implements ITimeInSeconds {
+public class Album implements IReadableTime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -46,6 +46,5 @@ public class Album implements ITimeInSeconds {
 //    @JsonManagedReference(value="tracks")
     private Set<Track> tracks = new HashSet<>();
     
-
 
 }
