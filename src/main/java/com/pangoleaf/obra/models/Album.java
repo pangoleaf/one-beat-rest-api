@@ -1,7 +1,7 @@
 package com.pangoleaf.obra.models;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,35 +11,40 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.pangoleaf.obra.utils.IReadableTime;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
 @Entity
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class Album {
-    
+@AllArgsConstructor @NoArgsConstructor
+@Getter @Setter @Accessors @Builder
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+public class Album implements IReadableTime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
     @ManyToOne
     @JoinColumn(name="artist_id", referencedColumnName="id")
+    @JsonBackReference
     private Artist artist;
     
     private String name;
     private Integer year;
-    private Integer runTime;
+    private Integer length;
     
     @OneToMany(mappedBy="album")
-    private List<Track> listTracks = new ArrayList<>();
+    @Builder.Default
+//    @JsonManagedReference(value="tracks")
+    private Set<Track> tracks = new HashSet<>();
     
-    public String runTimeReadable () {
-        return Math.floor(this.runTime / 60) + ":" + this.runTime % 60;
-    }
 
 }
