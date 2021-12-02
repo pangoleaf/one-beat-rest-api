@@ -278,7 +278,7 @@ insert into album (id,name,year,length,artist_id) values (24,'F♯ A♯ ∞',199
 insert into track (id,track_number,name,length,album_id) values (249,1,'The Dead Flag Blues',988,24);
 insert into track (id,track_number,name,length,album_id) values (250,2,'East Hastings',1078,24);
 insert into track (id,track_number,name,length,album_id) values (251,3,'Providence',1742,24);
-insert into album (id,name,year,length,artist_id) values (25,'Slow Riot for New Zero Kanada',1998,0,5);
+insert into album (id,name,year,length,artist_id) values (25,'Slow Riot for New Zero Kanada',1998,1716,5);
 insert into track (id,track_number,name,length,album_id) values (252,1,'Moya',652,25);
 insert into track (id,track_number,name,length,album_id) values (253,2,'Blaise Bailey Finnegan III',1065,25);
 insert into artist (id,name,country,start_year,end_year) values (6,'65daysofstatic','United Kingdom',2001,null);

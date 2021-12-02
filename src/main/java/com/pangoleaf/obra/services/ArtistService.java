@@ -15,4 +15,5 @@ public class ArtistService {
     public Artist createArtist(Artist artist) {
         return this.repo.save(artist);
     }
+    
 }

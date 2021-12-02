@@ -24,4 +24,5 @@ public class ArtistController extends BaseController {
         URI uri = Utils.getUri(this.mapping, Integer.toString(newArtist.getId()));
         return ResponseEntity.created(uri).body(newArtist);
     }
+    
 }
