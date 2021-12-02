@@ -33,6 +33,7 @@ public class Track implements IReadableTime {
     @JsonBackReference
     private Album album;
     
+    private Integer trackNumber;
     private String name;
     private Integer length;
 }
