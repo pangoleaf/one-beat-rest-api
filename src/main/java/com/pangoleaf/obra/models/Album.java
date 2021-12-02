@@ -3,6 +3,7 @@ package com.pangoleaf.obra.models;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -32,7 +33,7 @@ public class Album implements IReadableTime {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name="artist_id", referencedColumnName="id")
     @JsonBackReference
     private Artist artist;
@@ -41,7 +42,7 @@ public class Album implements IReadableTime {
     private Integer year;
     private Integer length;
     
-    @OneToMany(mappedBy="album")
+    @OneToMany(mappedBy="album", cascade=CascadeType.ALL)
     @Builder.Default
 //    @JsonManagedReference(value="tracks")
     private Set<Track> tracks = new HashSet<>();

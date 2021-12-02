@@ -13,8 +13,6 @@ public class ArtistService {
     @Autowired private AlbumService albumService;
     
     public Artist createArtist(Artist artist) {
-        Artist newArtist = this.repo.save(artist);
-        newArtist.getAlbums().forEach(a -> albumService.createAlbum(a.setArtist(artist)));
-        return newArtist;
+        return this.repo.save(artist);
     }
 }

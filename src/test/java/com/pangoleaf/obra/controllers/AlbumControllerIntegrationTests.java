@@ -10,6 +10,10 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.ResultMatcher;
@@ -19,8 +23,10 @@ import com.pangoleaf.obra.models.Album;
 import com.pangoleaf.obra.models.Artist;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@ActiveProfiles("test")
 @AutoConfigureMockMvc
-// @Sql(scripts = {"classpath:test-schema.sql", "classpath:test-data.sql"}, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+@TestPropertySource(locations="classpath:application-test.properties")
+@Sql(scripts = {"classpath:test-schema.sql", "classpath:test-data.sql"}, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 public class AlbumControllerIntegrationTests {
     @Autowired
     private MockMvc mvc;
@@ -30,22 +36,19 @@ public class AlbumControllerIntegrationTests {
 
     @Test
     void createAlbumTest() throws Exception {
-        Artist artist = new Artist(); // add album to existing artist from dummy data... implement dummy data
+        Artist artist = Artist.builder().id(1).name("Opeth").country("Sweden").startYear(1990).build();
         String albumJSON = this.mapper.writeValueAsString(
                 Album.builder()
-                    .artist(artist)
-                    .name("Opeth")
-                    .name("Ghost Reveries")
+                    .name("Ghost Reveries 2")
                     .year(2005)
                     .length(4003)
                     .build()
         );
         String albumJSONResponse = this.mapper.writeValueAsString(
                 Album.builder()
-                .id(1)
+                .id(56)
                 .artist(artist)
-                .name("Opeth")
-                .name("Ghost Reveries")
+                .name("Ghost Reveries 2")
                 .year(2005)
                 .length(4003)
                 .build()

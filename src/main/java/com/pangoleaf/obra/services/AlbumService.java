@@ -14,21 +14,18 @@ public class AlbumService {
     private AlbumRepo repo;
     @Autowired
     private ArtistRepo artistRepo;
-    @Autowired
-    private TrackService trackService;
 
     // CRUD
 
     public Album createAlbum(Album album) {
-        Artist artist;
-        if (album.getArtist().getId() != null) 
-            artist = this.artistRepo.findById(album.getArtist().getId()).orElseThrow();
-        else if (album.getArtist().getName() != null) 
-            artist = this.artistRepo.findFirstByNameIgnoreCase(album.getArtist().getName()).get();
-        else
-            artist = new Artist();
-        
-        return trackService.createTracksFromAlbum(this.repo.save(album.setArtist(artist)));
+        Artist artist = new Artist();  // throw exception instead
+        if (album.getArtist() != null) {
+            if (album.getArtist().getId() != null) 
+                artist = this.artistRepo.findById(album.getArtist().getId()).orElseThrow();
+            else if (album.getArtist().getName() != null) 
+                artist = this.artistRepo.findFirstByNameIgnoreCase(album.getArtist().getName()).orElseThrow();
+        }
+        return this.repo.save(album.setArtist(artist));
     }
 
 }
