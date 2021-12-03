@@ -14,17 +14,14 @@ import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import lombok.experimental.Accessors;
 
 @Entity
-@AllArgsConstructor @RequiredArgsConstructor
-@Getter @Setter @Accessors @Builder @ToString
+@NoArgsConstructor
+@Getter @Setter @Accessors
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Artist {
     @Id
@@ -39,7 +36,6 @@ public class Artist {
     private Integer endYear;
     
     @OneToMany(mappedBy="artist", cascade=CascadeType.ALL)
-    @Builder.Default
     private List<Album> albums = new ArrayList<>();
     
 }

@@ -13,10 +13,6 @@ public class Utils {
         return ServletUriComponentsBuilder.fromCurrentRequestUri().replacePath(path + "/" + id).build().toUri();
     }
     
-    public static URI getUri(String path) {
-        return ServletUriComponentsBuilder.fromCurrentRequestUri().replacePath(path).build().toUri();
-    }
-    
     public static String getTestData (String name) {
         String fileContents = null;
         try {
