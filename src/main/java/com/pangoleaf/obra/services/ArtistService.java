@@ -1,5 +1,7 @@
 package com.pangoleaf.obra.services;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,4 +18,7 @@ public class ArtistService {
         return this.repo.save(artist);
     }
     
+    public Optional<Artist> getArtist(Integer id) {
+        return this.repo.findById(id);
+    }
 }
