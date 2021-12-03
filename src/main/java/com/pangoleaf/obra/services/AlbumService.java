@@ -1,11 +1,17 @@
 package com.pangoleaf.obra.services;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pangoleaf.obra.models.Album;
 import com.pangoleaf.obra.models.Artist;
 import com.pangoleaf.obra.repos.AlbumRepo;
@@ -17,6 +23,10 @@ public class AlbumService {
     private AlbumRepo repo;
     @Autowired
     private ArtistRepo artistRepo;
+    
+    List<String> allowedSearchFields = List.of(
+            "name", "year", "length"
+    );
 
     // CRUD
 
@@ -29,6 +39,17 @@ public class AlbumService {
                 artist = this.artistRepo.findFirstByNameIgnoreCase(album.getArtist().getName()).orElseThrow();
         }
         return this.repo.save(album.setArtist(artist));
+    }
+    
+    public List<Album> getAllAlbums(Map<String,String> params) {
+        Map<String,String> filteredParams = 
+                params.entrySet().stream()
+                    .filter(e -> this.allowedSearchFields.contains(e.getKey()))
+                    .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        
+        Album egAlbum = new ObjectMapper().convertValue(filteredParams, Album.class);
+        ExampleMatcher matcher = ExampleMatcher.matchingAll();
+        return this.repo.findAll(Example.of(egAlbum, matcher));
     }
     
     public Optional<Album> getAlbum(Integer id) {
