@@ -8,7 +8,7 @@ In the end I found that adding complexity to an application when learning certai
 
 Overall I'm very happy though as I managed to learn and implement relational entities, Lombok and custom filtering of GET results, which was all beyond what was taught, and ironing out the creases of all of that really solidified my understanding of Java and Spring as a whole. With all this in mind I still was able to achieve 94.5% test coverage. 
 
-Further features I would like to add include a basic html/javascript/css front-end (or React/Vue once I've learned them), and deploying the app to Heroku or a similar service.
+Further features I would like to add include non-data query parameters (e.g. filter by between years, instead of just a specific year), a basic html/javascript/css front-end (or React/Vue once I've learned them), and deploying the app to Heroku or a similar service.
 
 ### Evidence
 
