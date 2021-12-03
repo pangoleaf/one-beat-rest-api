@@ -1,6 +1,8 @@
 package com.pangoleaf.obra.controllers;
 
 import java.net.URI;
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +30,12 @@ public class ArtistController extends BaseController {
         URI uri = Utils.getUri(this.mapping, Integer.toString(newArtist.getId()));
         return ResponseEntity.created(uri).body(newArtist);
     }
-        
+    
+    @GetMapping
+    public ResponseEntity<List<Artist>> getAllArtists() {
+        return ResponseEntity.of(Optional.ofNullable(this.service.getAllArtists()));
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Artist> findArtistById(@PathVariable("id") Integer id) {
         return ResponseEntity.of(this.service.getArtist(id));

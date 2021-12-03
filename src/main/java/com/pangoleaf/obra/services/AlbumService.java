@@ -1,5 +1,6 @@
 package com.pangoleaf.obra.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,10 @@ public class AlbumService {
                 artist = this.artistRepo.findFirstByNameIgnoreCase(album.getArtist().getName()).orElseThrow();
         }
         return this.repo.save(album.setArtist(artist));
+    }
+    
+    public List<Album> getAllAlbums() {
+        return this.repo.findAll();
     }
     
     public Optional<Album> getAlbum(Integer id) {
