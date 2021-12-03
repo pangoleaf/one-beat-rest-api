@@ -4,6 +4,7 @@ import java.net.URI;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,5 +37,10 @@ public class AlbumController extends BaseController {
     @PutMapping("/{id}")
     public ResponseEntity<Album> updateAlbum(@RequestBody Album album, @PathVariable Integer id) {
         return ResponseEntity.ok().body(this.service.updateAlbum(album, id));
+    }
+    
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteAlbum(@PathVariable Integer id) {
+        return this.service.deleteAlbum(id) ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }
 }

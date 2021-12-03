@@ -1,5 +1,6 @@
 package com.pangoleaf.obra.controllers;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -70,5 +71,10 @@ public class AlbumControllerIntegrationTests {
         ResultMatcher content = content().json(artistJSON);
         
         this.mvc.perform(request).andExpect(status).andExpect(content);
+    }
+    
+    @Test
+    void deleteAlbumTest() throws Exception {
+        this.mvc.perform(delete("/album/32")).andExpect(status().isNoContent());
     }
 }

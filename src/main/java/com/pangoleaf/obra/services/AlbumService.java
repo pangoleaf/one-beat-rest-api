@@ -3,6 +3,7 @@ package com.pangoleaf.obra.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.pangoleaf.obra.models.Album;
@@ -42,5 +43,13 @@ public class AlbumService {
                 .setTracks(album.getTracks());
         return this.repo.save(albumToUpdate);
     }
-
+    
+    public boolean deleteAlbum(Integer id) {
+        try {
+            this.repo.deleteById(id);
+            return !this.repo.existsById(id);
+        } catch (EmptyResultDataAccessException e) {
+            return false;
+        }
+    }
 }
