@@ -31,7 +31,7 @@ public class AlbumService {
     // CRUD
 
     public Album createAlbum(Album album) {
-        Artist artist = new Artist();  // throw exception instead
+        Artist artist = new Artist();
         if (album.getArtist() != null) {
             if (album.getArtist().getId() != null) 
                 artist = this.artistRepo.findById(album.getArtist().getId()).orElseThrow();

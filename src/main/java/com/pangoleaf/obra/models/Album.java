@@ -27,7 +27,7 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor @NoArgsConstructor
 @Getter @Setter @Accessors @Builder
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class Album {  // implements IReadableTime {
+public class Album {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -40,11 +40,8 @@ public class Album {  // implements IReadableTime {
     private String name;
     private Integer year;
     private Integer length;
-//    @Transient
-//    private String lengthStr;
     
     @OneToMany(mappedBy="album", cascade=CascadeType.ALL)
     @Builder.Default
-//    @JsonManagedReference(value="tracks")
     private List<Track> tracks = new ArrayList<>();
 }

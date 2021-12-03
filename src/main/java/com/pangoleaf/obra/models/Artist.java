@@ -40,7 +40,6 @@ public class Artist {
     
     @OneToMany(mappedBy="artist", cascade=CascadeType.ALL)
     @Builder.Default
-//    @JsonManagedReference(value="albums")
     private List<Album> albums = new ArrayList<>();
     
 }

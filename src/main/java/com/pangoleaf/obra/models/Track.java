@@ -23,7 +23,7 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor @RequiredArgsConstructor
 @Getter @Setter @Accessors @Builder
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class Track {  // implements IReadableTime {
+public class Track {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -36,6 +36,4 @@ public class Track {  // implements IReadableTime {
     private Integer trackNumber;
     private String name;
     private Integer length;
-//    @Transient
-//    private String lengthStr;
 }
