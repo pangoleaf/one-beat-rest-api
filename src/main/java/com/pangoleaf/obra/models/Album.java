@@ -3,6 +3,7 @@ package com.pangoleaf.obra.models;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,10 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import com.pangoleaf.obra.utils.IReadableTime;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,24 +27,24 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor @NoArgsConstructor
 @Getter @Setter @Accessors @Builder
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class Album implements IReadableTime {
+public class Album {  // implements IReadableTime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name="artist_id", referencedColumnName="id")
-    @JsonBackReference
+//    @JsonBackReference
     private Artist artist;
     
     private String name;
     private Integer year;
     private Integer length;
+//    @Transient
+//    private String lengthStr;
     
-    @OneToMany(mappedBy="album")
+    @OneToMany(mappedBy="album", cascade=CascadeType.ALL)
     @Builder.Default
-//    @JsonManagedReference(value="tracks")
+    @JsonManagedReference(value="tracks")
     private Set<Track> tracks = new HashSet<>();
-    
-
 }
