@@ -28,7 +28,7 @@ public class AlbumController extends BaseController {
         URI uri = Utils.getUri(this.mapping, Integer.toString(newAlbum.getId()));
         return ResponseEntity.created(uri).body(newAlbum);
     }
-    
+        
     @GetMapping("/{id}")
     public ResponseEntity<Album> findAlbumById(@PathVariable("id") Integer id) {
         return ResponseEntity.of(this.service.getAlbum(id));

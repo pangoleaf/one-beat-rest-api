@@ -28,7 +28,7 @@ public class ArtistController extends BaseController {
         URI uri = Utils.getUri(this.mapping, Integer.toString(newArtist.getId()));
         return ResponseEntity.created(uri).body(newArtist);
     }
-    
+        
     @GetMapping("/{id}")
     public ResponseEntity<Artist> findArtistById(@PathVariable("id") Integer id) {
         return ResponseEntity.of(this.service.getArtist(id));
