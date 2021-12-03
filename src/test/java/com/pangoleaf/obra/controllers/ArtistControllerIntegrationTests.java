@@ -1,5 +1,6 @@
 package com.pangoleaf.obra.controllers;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -71,4 +72,8 @@ public class ArtistControllerIntegrationTests {
         this.mvc.perform(request).andExpect(status).andExpect(content);
     }
     
+    @Test
+    void deleteArtistTest() throws Exception {
+        this.mvc.perform(delete("/artist/2")).andExpect(status().isNoContent());
+    }
 }
