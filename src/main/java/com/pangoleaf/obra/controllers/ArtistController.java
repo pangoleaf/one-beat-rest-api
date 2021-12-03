@@ -2,6 +2,7 @@ package com.pangoleaf.obra.controllers;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pangoleaf.obra.models.Artist;
@@ -32,8 +34,8 @@ public class ArtistController extends BaseController {
     }
     
     @GetMapping
-    public ResponseEntity<List<Artist>> getAllArtists() {
-        return ResponseEntity.of(Optional.ofNullable(this.service.getAllArtists()));
+    public ResponseEntity<List<Artist>> getAllArtists(@RequestParam Map<String,String> allParams) {
+        return ResponseEntity.of(Optional.ofNullable(this.service.getAllArtists(allParams)));
     }
 
     @GetMapping("/{id}")

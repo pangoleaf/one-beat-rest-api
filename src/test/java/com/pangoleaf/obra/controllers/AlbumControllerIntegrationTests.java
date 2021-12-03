@@ -74,6 +74,18 @@ public class AlbumControllerIntegrationTests {
     }
     
     @Test
+    void getFilteredAlbumsTest() throws Exception {
+        String filteredAlbumsJSON = Utils.getTestData("get-albums-from-2002");
+        
+        RequestBuilder request = get("/album?year=2002");
+        
+        ResultMatcher status = status().isOk();
+        ResultMatcher content = content().json(filteredAlbumsJSON);
+        
+        this.mvc.perform(request).andExpect(status).andExpect(content);
+    }
+    
+    @Test
     void updateArtistTest() throws Exception {
         String artistJSON = Utils.getTestData("put-album");
         
