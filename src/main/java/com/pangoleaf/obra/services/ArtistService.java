@@ -21,4 +21,13 @@ public class ArtistService {
     public Optional<Artist> getArtist(Integer id) {
         return this.repo.findById(id);
     }
+    
+    public Artist updateArtist(Artist artist, Integer id) {
+        Artist artistToUpdate = this.repo.findById(id).get()
+                .setName(artist.getName())
+                .setCountry(artist.getCountry())
+                .setStartYear(artist.getStartYear())
+                .setEndYear(artist.getEndYear());
+        return this.repo.save(artistToUpdate);
+    }
 }

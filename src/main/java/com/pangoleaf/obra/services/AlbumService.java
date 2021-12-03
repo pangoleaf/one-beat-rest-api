@@ -33,5 +33,14 @@ public class AlbumService {
     public Optional<Album> getAlbum(Integer id) {
         return this.repo.findById(id);
     }
+    
+    public Album updateAlbum(Album album, Integer id) {
+        Album albumToUpdate = this.repo.findById(id).get()
+                .setName(album.getName())
+                .setYear(album.getYear())
+                .setLength(album.getLength())
+                .setTracks(album.getTracks());
+        return this.repo.save(albumToUpdate);
+    }
 
 }
