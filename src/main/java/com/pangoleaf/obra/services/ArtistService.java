@@ -1,5 +1,6 @@
 package com.pangoleaf.obra.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,10 @@ public class ArtistService {
         return this.repo.save(artist);
     }
     
+    public List<Artist> getAllArtists() {
+        return this.repo.findAll();
+    }
+  
     public Optional<Artist> getArtist(Integer id) {
         return this.repo.findById(id);
     }

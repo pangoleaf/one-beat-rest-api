@@ -61,6 +61,18 @@ public class ArtistControllerIntegrationTests {
     }
     
     @Test
+    void getAllArtistsTest() throws Exception {
+        String allArtistsJSON = Utils.getTestData("get-all-artists");
+        
+        RequestBuilder request = get("/artist");
+        
+        ResultMatcher status = status().isOk();
+        ResultMatcher content = content().json(allArtistsJSON);
+        
+        this.mvc.perform(request).andExpect(status).andExpect(content);
+    }
+    
+    @Test
     void updateAritstTest() throws Exception {
         String artistJSON = Utils.getTestData("put-artist");
         

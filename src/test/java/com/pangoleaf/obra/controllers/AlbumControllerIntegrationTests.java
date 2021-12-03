@@ -62,7 +62,19 @@ public class AlbumControllerIntegrationTests {
     }
     
     @Test
-    void updateAritstTest() throws Exception {
+    void getAllAlbumsTest() throws Exception {
+        String allArtistsJSON = Utils.getTestData("get-all-albums");
+        
+        RequestBuilder request = get("/album");
+        
+        ResultMatcher status = status().isOk();
+        ResultMatcher content = content().json(allArtistsJSON);
+        
+        this.mvc.perform(request).andExpect(status).andExpect(content);
+    }
+    
+    @Test
+    void updateArtistTest() throws Exception {
         String artistJSON = Utils.getTestData("put-album");
         
         RequestBuilder request = put("/album/25").contentType(MediaType.APPLICATION_JSON).content(artistJSON);
