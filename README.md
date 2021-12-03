@@ -15,3 +15,5 @@ Further features I would like to add include a basic html/javascript/css front-e
 Screenshots of test results/coverage and numerous Postman requests/results exist, descriptively labelled, in the following folder, along with evidence of data and changes being persisted in h2: https://github.com/pangoleaf/one-beat-rest-api/tree/main/screenshots
 
 Completed Jira Board: https://mattqa.atlassian.net/jira/software/projects/OBRA/boards/3/backlog
+
+Entity Relationship Diagram (using IDEF1X representations of one-to-many etc instead of the usual) https://github.com/pangoleaf/one-beat-rest-api/blob/main/Entity-Relationship-Diagram-(IDEF1X-notation).png
