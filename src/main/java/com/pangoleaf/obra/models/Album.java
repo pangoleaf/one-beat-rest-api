@@ -1,8 +1,9 @@
 package com.pangoleaf.obra.models;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,7 +15,6 @@ import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import com.pangoleaf.obra.utils.IReadableTime;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,12 +27,12 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor @NoArgsConstructor
 @Getter @Setter @Accessors @Builder
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class Album implements IReadableTime {
+public class Album {  // implements IReadableTime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name="artist_id", referencedColumnName="id")
     @JsonBackReference
     private Artist artist;
@@ -40,11 +40,11 @@ public class Album implements IReadableTime {
     private String name;
     private Integer year;
     private Integer length;
+//    @Transient
+//    private String lengthStr;
     
-    @OneToMany(mappedBy="album")
+    @OneToMany(mappedBy="album", cascade=CascadeType.ALL)
     @Builder.Default
 //    @JsonManagedReference(value="tracks")
-    private Set<Track> tracks = new HashSet<>();
-    
-
+    private List<Track> tracks = new ArrayList<>();
 }

@@ -1,6 +1,9 @@
 package com.pangoleaf.obra.services;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.pangoleaf.obra.models.Artist;
@@ -13,8 +16,28 @@ public class ArtistService {
     @Autowired private AlbumService albumService;
     
     public Artist createArtist(Artist artist) {
-        Artist newArtist = this.repo.save(artist);
-        newArtist.getAlbums().forEach(a -> albumService.createAlbum(a.setArtist(artist)));
-        return newArtist;
+        return this.repo.save(artist);
+    }
+    
+    public Optional<Artist> getArtist(Integer id) {
+        return this.repo.findById(id);
+    }
+    
+    public Artist updateArtist(Artist artist, Integer id) {
+        Artist artistToUpdate = this.repo.findById(id).get()
+                .setName(artist.getName())
+                .setCountry(artist.getCountry())
+                .setStartYear(artist.getStartYear())
+                .setEndYear(artist.getEndYear());
+        return this.repo.save(artistToUpdate);
+    }
+    
+    public boolean deleteArtist(Integer id) {
+        try {
+            this.repo.deleteById(id);
+            return !this.repo.existsById(id);
+        } catch (EmptyResultDataAccessException e) {
+            return false;
+        }
     }
 }

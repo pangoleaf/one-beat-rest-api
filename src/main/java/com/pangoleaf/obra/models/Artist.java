@@ -1,8 +1,9 @@
 package com.pangoleaf.obra.models;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -37,9 +38,9 @@ public class Artist {
     private Integer startYear;
     private Integer endYear;
     
-    @OneToMany(mappedBy="artist")
+    @OneToMany(mappedBy="artist", cascade=CascadeType.ALL)
     @Builder.Default
 //    @JsonManagedReference(value="albums")
-    private Set<Album> albums = new HashSet<>();
+    private List<Album> albums = new ArrayList<>();
     
 }
