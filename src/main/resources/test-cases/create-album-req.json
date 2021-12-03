@@ -1,0 +1,30 @@
+{
+	"artist": {
+		"name": "Godspeed You! Black Emperor"
+	},
+	"name": "Luciferian Towers",
+	"year": 2017,
+	"length": 2580,
+	"tracks": [
+		{
+			"trackNumber": 1,
+			"name": "Undoing a Luciferian Towers",
+			"length": 467
+		},
+		{
+			"trackNumber": 2,
+			"name": "Bosses Hang",
+			"length": 885
+		},
+		{
+			"trackNumber": 3,
+			"name": "Fam / Famine",
+			"length": 404
+		},
+		{
+			"trackNumber": 4,
+			"name": "Anthem for No State",
+			"length": 878
+		}
+	]
+}

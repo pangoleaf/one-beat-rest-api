@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -29,7 +30,7 @@ public class Track {  // implements IReadableTime {
     
     @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name="album_id", referencedColumnName="id")
-//    @JsonBackReference
+    @JsonBackReference
     private Album album;
     
     private Integer trackNumber;
