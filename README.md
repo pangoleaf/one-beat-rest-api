@@ -12,6 +12,6 @@ Further features I would like to add include a basic html/javascript/css front-e
 
 ### Evidence
 
-Screenshots of test results/coverage and numerous Postman requests/results exist, descripticvely labelled, in the following folder, along with evidence of data and changes being persisted in h2: https://github.com/pangoleaf/one-beat-rest-api/tree/main/screenshots
+Screenshots of test results/coverage and numerous Postman requests/results exist, descriptively labelled, in the following folder, along with evidence of data and changes being persisted in h2: https://github.com/pangoleaf/one-beat-rest-api/tree/main/screenshots
 
 Completed Jira Board: https://mattqa.atlassian.net/jira/software/projects/OBRA/boards/3/backlog
