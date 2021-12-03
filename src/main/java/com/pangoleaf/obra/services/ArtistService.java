@@ -3,6 +3,7 @@ package com.pangoleaf.obra.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.pangoleaf.obra.models.Artist;
@@ -29,5 +30,14 @@ public class ArtistService {
                 .setStartYear(artist.getStartYear())
                 .setEndYear(artist.getEndYear());
         return this.repo.save(artistToUpdate);
+    }
+    
+    public boolean deleteArtist(Integer id) {
+        try {
+            this.repo.deleteById(id);
+            return !this.repo.existsById(id);
+        } catch (EmptyResultDataAccessException e) {
+            return false;
+        }
     }
 }
